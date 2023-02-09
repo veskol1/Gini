@@ -16,8 +16,6 @@ class Repository @Inject constructor(private val api: Api) {
             getGoodList(response.body()!!.list)
         }
     }
-
-
     private fun getGoodList(list: List<GiniNumber>): ArrayList<GiniNumberViewItem> {
         val listOfNumber = arrayListOf<GiniNumberViewItem>()
         val hashMap = hashMapOf<Int,Int>()
@@ -26,14 +24,14 @@ class Repository @Inject constructor(private val api: Api) {
         list.forEach { number ->
             val x = abs(number.value)
             if (hashMap[x] == null) {
-                hashMap[x] = 1
+                hashMap[x] = ORANGE
             } else {
-                hashMap[x] = 2
+                hashMap[x] = RED
             }
         }
 
         list.forEach { number ->
-            if (hashMap[abs(number.value)] == 2) {
+            if (hashMap[abs(number.value)] == RED) {
                 listOfNumber.add(GiniNumberViewItem.RedItemView(value = number.value))
             } else {
                 listOfNumber.add(GiniNumberViewItem.OrangeItemView(value = number.value))
@@ -41,5 +39,10 @@ class Repository @Inject constructor(private val api: Api) {
         }
 
         return listOfNumber
+    }
+
+    companion object {
+        private const val ORANGE = 1
+        private const val RED = 2
     }
 }
