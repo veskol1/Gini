@@ -17,7 +17,6 @@ class GiniAdapter : RecyclerView.Adapter<GiniNumberViewHolder>() {
             notifyDataSetChanged()
         }
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GiniNumberViewHolder {
         return when(viewType) {
             R.layout.item_red -> GiniNumberViewHolder.RedNumberViewHolder(
